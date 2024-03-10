@@ -1,7 +1,10 @@
 import React from 'react';
-import { useParams,useNavigate } from 'react-router';
+// import { useParams } from 'react';
+import { Link, useNavigate,  useParams  } from 'react-router-dom';
+import dummy from '../json/data.json';
 
-function DetailDiary({db}) {
+function DetailDiary() {
+  const db = dummy.diaries;
   const { id } = useParams();
   const selectItem = db.filter(diary => diary.id === (id/1));
 
@@ -22,7 +25,8 @@ function DetailDiary({db}) {
             <p>내용 : {item.feeling}</p>
             <p>타이틀: {item.content}</p>
             <button onClick={() => navigator('/')}>이전</button>
-            <button>수정하기</button>
+            <Link to={`/edit/${id}`}>수정하기</Link>
+            <button>삭제</button>
           </div>
         ))
       }
